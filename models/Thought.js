@@ -1,5 +1,6 @@
 const {Schema, model} = require('mongoose');
 
+//schema for thought model
 const thoughtsSchema = new Schema(
     {
 thoughtText: {
@@ -9,17 +10,15 @@ thoughtText: {
     maxLength: 280
 },
 createdAt:{
-    date:, 
-    timestamp:,
-
+    date:,
+    timestamps: true
 },
 userName: {
-    type:String,
-    required:true
+    type: String,
+    required: true
 },
 reactions: {
-    type:String,
-    required: true
+    type: String,
 },
     toJSON: {
       virtuals: true,
