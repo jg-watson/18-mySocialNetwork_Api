@@ -10,16 +10,19 @@ thoughtText: {
     maxLength: 280
 },
 createdAt:{
-    date:,
-    timestamps: true
+    timestamps: { 
+        type: Date,
+        default: Date.now
+    }
 },
 userName: {
     type: String,
     required: true
 },
-reactions: {
-    type: String,
-},
+reactions: []
+
+    },
+{
     toJSON: {
       virtuals: true,
     },

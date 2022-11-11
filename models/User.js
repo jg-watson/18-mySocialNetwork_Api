@@ -1,71 +1,48 @@
-const {Schema, model} = require('mongoose');
-
+const { Schema, model } = require("mongoose");
 
 //schema for User model
-const userSchema = new Schema(
-     {
-      username: {
-        type: String, 
-        unique: true,
-        required: true, 
-        trim: true 
-      },
-      email: {
-        type: String,
-        required: true,
-        unique: true,
-        validate: {
-          validator:() => Promise.resolve(false),
-          message:'Email validation failed'
-        }
+const userSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      unique: true,
+      required: true,
+      trim: true,
     },
-    thoughts: {
-      idValues: {
-        userId: {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      match: [],
+    },
+    thoughts: [
+      {
         type: Schema.Types.ObjectId,
-        ref:"thoughtsSchema",
-        required: true
-      }
-      }
-    },
-    friends: {
-      idValues: {
-        userId: {
-          type: Schema.Types.ObjectId,
-          ref:"userSchema",
-          required: true
-        }
-      }
-        
-    },
-    {
-      toJSON: {
-        virtuals: true,
+        ref: "thought",
       },
-      id: false
-    }
+    ],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "user",
+      },
+    ],
+  },
+  {
+    toJSON: {
+      virtuals: true,
+    },
+    id: false,
+  }
 );
 
-// logic for email validation
-user.email = 'test@test.co';
-user.name = 'test';
-
-let error;
-try {
-  await user.validate();
-} catch (err) {
-  error = err;
-}
-assert.ok(error);
-assert.equal(error.errors['name'].message, 'Oops!');
-assert.equal(error.errors['email'].message, 'Email validation failed');
-
-// 
-userSchema.virtual('friendCount').get(function() {
+//virtual
+userSchema.virtual("friendCount").get(function () {
   return this.friends.length;
 });
 
 // initialize user model:
 
+const User = model("user", userSchema);
 
-module.export = Users;
+module.export = User;
