@@ -13,7 +13,8 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      match: [],
+      //will this work??
+      match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/],
     },
     thoughts: [
       {
@@ -41,7 +42,7 @@ userSchema.virtual("friendCount").get(function () {
   return this.friends.length;
 });
 
-// initialize user model:
+// initialize and exporting User model
 
 const User = model("user", userSchema);
 

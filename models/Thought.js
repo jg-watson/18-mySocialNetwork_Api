@@ -19,8 +19,7 @@ userName: {
     type: String,
     required: true
 },
-reactions: []
-
+reactions: [reactionsSchema], 
     },
 {
     toJSON: {
@@ -29,5 +28,8 @@ reactions: []
     id: false,
   }
 );
+
+// Initializing and exporting Thoughts model
+const Thoughts = model('thoughts', thoughtsSchema,);
 
 modules.export = Thoughts;
