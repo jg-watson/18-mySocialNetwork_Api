@@ -22,7 +22,6 @@ createdAt: {
         default: Date.now
     }
     },
-
 },
 {
     toJSON: {
