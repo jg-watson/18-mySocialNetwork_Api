@@ -1,8 +1,7 @@
 const {User, Thought} = require('../models');
 
-module.export = {
-
-    // get all users
+module.exports = {
+// get all users
 getUser(req, res) {
     User.find()
     .then((user) => res.json(user))
@@ -23,11 +22,8 @@ getSingleUser(req, res) {
 
 // create user
 createUser(req, res) {
-    User.create( req.body)
+    User.create(req.body)
     .then((user) => res.json(user))
-    .catch((err) => {
-console.log(err);
-return res.status(500).json(err);
-    });
-},
+    .catch((err) => res.status(500).json(err));
+    },
 };
