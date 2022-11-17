@@ -25,6 +25,11 @@ getSingleThought(req, res) {
 createThought(req, res) {
     Thought.create(req.body)
     .then((thought) => res.json(thought))
+    return User.findOneAndUpdate(
+        {_id: req.params.thoughtText},
+        {$set: req.body},
+        {runValidators: true, new: true}
+        ) 
     .catch((err) => {
         console.log(err);
         return res.status(500).json(err);
